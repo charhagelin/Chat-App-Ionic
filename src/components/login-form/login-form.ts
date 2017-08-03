@@ -23,24 +23,17 @@ export class LoginFormComponent {
         result: await this.ofAuth.auth.signInWithEmailAndPassword(this.account.email, this.account.password)
       }
       this.logInStatus.emit(result);
-      // this.toast.create({
-      //   message: 'success!',
-      //   duration: 3000,
-      //   position: 'top'
-      // }).present();
     }
     catch (e) {
       console.error(e);
       const error: LoginResponse = {
         error: e
       }
-      this.logInStatus.emit(error)
-      // this.toast.create({
-      //   message: e.message,
-      //   duration: 3000,
-      //   position: 'top'
-      // }).present();
+      this.logInStatus.emit(error);
     }
+  }
+  navigateToRegisterPage() {
+    this.navCtrl.push('RegisterPage');
   }
 
   // navigateToPage(pageName: string) {
