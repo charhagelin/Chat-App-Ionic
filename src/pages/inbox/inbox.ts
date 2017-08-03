@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the IboxPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { MESSAGE_LIST } from '../../mocks/messages/messages';
+import { Message } from '../../models/message/message.interface';
 
 @IonicPage()
 @Component({
@@ -15,11 +10,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class InboxPage {
 
+  messageList: Message[] = MESSAGE_LIST;
+  //vi säger med : Messages[] att messageList måste vara av typen Message array. 
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+     console.log(this.messageList);
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InboxPage');
   }
-
 }

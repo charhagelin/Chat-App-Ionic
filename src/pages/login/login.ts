@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
+import { LoginResponse } from '../../models/login/login-response.interface';
+import { ToastController } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
@@ -8,11 +11,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class LoginPage {
 
-  constructor(private navCtrl: NavController, private navParams: NavParams) {
+  constructor(private toast: ToastController, private navCtrl: NavController) {
   }
+  login(event: LoginResponse) {
+    if (!event.error) {
+      this.toast.create({
+        message: 'success! welcome `{$event.result.email}`',
+        duration: 3000,
+        position: 'top'
+      }).present();
 
-  navigateToPage(pageName: string) {
-   pageName === 'InboxPage' ? this.navCtrl.setRoot(pageName) : this.navCtrl.push(pageName);
+      return this.navCtrl.setRoot('ProfilePage');
+    }
+    else {
+      this.toast.create({
+        message: event.error.message,
+        duration: 30000,
+        position: 'top'
+      }).present();
+    }
   }
-
 }
